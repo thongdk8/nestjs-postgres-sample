@@ -15,7 +15,7 @@ export class TransferRequestsService {
 
   async create(user: User, createTransferRequestDto: CreateTransferRequestDto): Promise<TransferRequest> {
     let result;
-    await getManager().transaction(async (transactionalEntityManager) => {
+    await getManager().transaction('SERIALIZABLE', async (transactionalEntityManager) => {
       const employee = await transactionalEntityManager.findOne(Employee, { user });
       if (!employee) {
         throw new NotFoundException(null, 'Employee not found');
