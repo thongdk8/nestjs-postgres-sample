@@ -19,6 +19,16 @@ $ npm run schema:sync
 $ npm run apply:migration
 ```
 
+The default system admin (Salary Hero) is defined
+in [CreateSystemAdmin](./src/migrations/1665850833973-CreateSystemAdmin.ts) migration file
+
+```json
+{
+  "email": "system@email.com",
+  "password": "password"
+}
+```
+
 ## Running the app
 
 ```bash
