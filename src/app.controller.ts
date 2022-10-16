@@ -5,7 +5,7 @@ import { JwtAuthGuard } from './modules/auth/strategy/jwt-auth.guard';
 import { RolesGuard } from './modules/auth/strategy/roles.guard';
 import { Roles } from './custom.decorator';
 import { Role } from './modules/users/enums/role.enum';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 @Controller()
 @ApiTags('Heath Check')
@@ -27,9 +27,10 @@ export class AppController {
     res.status(200).json(body);
   }
 
-  @Get('/premium-echo')
+  @Get('/system-admin-echo')
+  @ApiBearerAuth()
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(Role.premium)
+  @Roles(Role.SYSTEM_ADMIN)
   getPremiumEcho(@Req() req, @Res() res, @Body() body) {
     res.status(200).json(body);
   }

@@ -11,7 +11,7 @@ import { CreateTransferRequestDto } from './dto/create-transfer-request.dto';
 @ApiTags('Company Employees')
 @ApiBearerAuth()
 @UseGuards(JwtAuthGuard, RolesGuard)
-@Roles(Role.SYSTEM_ADMIN)
+@Roles(Role.EMPLOYEE)
 export class TransferRequestsController {
   constructor(private readonly transferRequestsService: TransferRequestsService) {}
 

@@ -16,9 +16,9 @@ export class AuthController {
     res.status(auth.status).json(auth.msg);
   }
 
-  @Post('register')
-  async register(@Req() req, @Res() res, @Body() body: CreateUserDto) {
-    const auth = await this.authService.register(body);
-    res.status(auth.status).json(auth.content);
-  }
+  // @Post('register')
+  // async register(@Req() req, @Res() res, @Body() body: CreateUserDto) {
+  //   const auth = await this.authService.register(body);
+  //   res.status(auth.status).json(auth.content);
+  // }
 }

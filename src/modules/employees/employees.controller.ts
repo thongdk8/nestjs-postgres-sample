@@ -13,7 +13,7 @@ import { UpdateEmployeeDto } from './dto/update-employee.dto';
 @ApiTags('Company Employees')
 @ApiBearerAuth()
 @UseGuards(JwtAuthGuard, RolesGuard)
-@Roles(Role.SYSTEM_ADMIN)
+@Roles(Role.COMPANY_ADMIN)
 export class EmployeesController {
   constructor(private readonly employeesService: EmployeesService) {
   }
