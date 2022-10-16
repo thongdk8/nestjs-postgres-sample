@@ -6,7 +6,7 @@ import { CompanyAdminsController } from './company-admins.controller';
 import { Company } from '../companies/entities/company.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([CompanyAdmin]), TypeOrmModule.forFeature([Company])],
+  imports: [TypeOrmModule.forFeature([CompanyAdmin, Company])],
   controllers: [CompanyAdminsController],
   providers: [CompanyAdminsService],
   exports: [CompanyAdminsService],

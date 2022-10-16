@@ -6,7 +6,7 @@ import { TransferRequestsController } from './transfer-requests.controller';
 import { Employee } from '../employees/entities/employee.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([TransferRequest]), TypeOrmModule.forFeature([Employee])],
+  imports: [TypeOrmModule.forFeature([TransferRequest, Employee])],
   controllers: [TransferRequestsController],
   providers: [TransferRequestsService],
   exports: [TransferRequestsService],

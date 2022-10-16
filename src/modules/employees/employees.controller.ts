@@ -8,6 +8,7 @@ import { EmployeesService } from './employees.service';
 import { CreateEmployeeDto } from './dto/create-employee.dto';
 import { UpdateCompanyDto } from '../companies/dto/update-company.dto';
 import { UpdateEmployeeDto } from './dto/update-employee.dto';
+import { ImportEmployeesDto } from './dto/import-employees.dto';
 
 @Controller('employees')
 @ApiTags('Company Employees')
@@ -15,12 +16,16 @@ import { UpdateEmployeeDto } from './dto/update-employee.dto';
 @UseGuards(JwtAuthGuard, RolesGuard)
 @Roles(Role.COMPANY_ADMIN)
 export class EmployeesController {
-  constructor(private readonly employeesService: EmployeesService) {
-  }
+  constructor(private readonly employeesService: EmployeesService) {}
 
   @Post()
   create(@Body() createEmployeeDto: CreateEmployeeDto) {
     return this.employeesService.create(createEmployeeDto);
+  }
+
+  @Post('/import')
+  import(@Body() importEmployeesDto: ImportEmployeesDto) {
+    return this.employeesService.import(importEmployeesDto);
   }
 
   @Get()

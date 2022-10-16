@@ -1,8 +1,8 @@
 import { IsNotEmpty, IsNumber } from 'class-validator';
-import { ApiPropertyOptional } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateTransferRequestDto {
-  @ApiPropertyOptional({
+  @ApiProperty({
     type: Number,
   })
   @IsNotEmpty()
