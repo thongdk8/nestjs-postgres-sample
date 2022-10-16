@@ -36,6 +36,8 @@ The swagger UI will be available at http://localhost:3000/api/# by default
 
 ### Implementation notes
 
+- Using `prime-nestjs` boilerplate https://github.com/joeygoksu/prime-nestjs
+
 - The transfer request from employee is created in transaction
   mode [transfer-requests.service.ts](./src/modules/transfer-requests/transfer-requests.service.ts)
 - Database entities
