@@ -10,10 +10,10 @@ async function bootstrap() {
   app.setGlobalPrefix('api');
 
   const config = new DocumentBuilder()
-    .setTitle('prime nestjs')
-    .setDescription('Boilerplate for nestjs')
+    .setTitle('Salary Hero APIs')
+    .setDescription('Salary Hero APIs')
     .setVersion('1.0')
-    .addTag('api')
+    .addBearerAuth({ in: 'header', type: 'http' })
     .build();
 
   const document = SwaggerModule.createDocument(app, config);

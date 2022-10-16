@@ -1,0 +1,24 @@
+version: '3.9'
+
+services:
+  database:
+    container_name: app_postgres_dev
+    image: postgres:12
+    env_file: .env
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - app-network
+    ports:
+      - '5432:5432'
+    healthcheck:
+      test: pg_isready
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+networks:
+  app-network:
+
+volumes:
+  postgres-data:

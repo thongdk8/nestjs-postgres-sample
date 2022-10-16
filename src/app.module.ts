@@ -2,12 +2,44 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ScheduleModule } from '@nestjs/schedule';
-import { TasksModule } from './tasks/tasks.module';
-import { AuthModule } from './auth/auth.module';
-import { UsersModule } from './users/users.module';
+import { AuthModule } from './modules/auth/auth.module';
+import { UsersModule } from './modules/users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import configuration from './config';
+import { CompaniesModule } from './modules/companies/companies.module';
+import { CompanyAdminsModule } from './modules/company-admins/company-admins.module';
+import { RouterModule, Routes } from '@nestjs/core';
+import { EmployeesModule } from './modules/employees/employees.module';
+import { TransferRequestsModule } from './modules/transfer-requests/transfer-requests.module';
+
+const routes: Routes = [
+  {
+    path: '/v1',
+    children: [
+      {
+        path: '/auth',
+        module: AuthModule,
+      },
+      {
+        path: '/companies',
+        module: CompaniesModule,
+      },
+      {
+        path: '/company-admins',
+        module: CompanyAdminsModule,
+      },
+      {
+        path: '/employees',
+        module: EmployeesModule,
+      },
+      {
+        path: '/transfer-request',
+        module: TransferRequestsModule,
+      },
+    ],
+  },
+];
 
 @Module({
   imports: [
@@ -20,10 +52,14 @@ import configuration from './config';
       useFactory: (configService: ConfigService) => configService.get('database'),
       inject: [ConfigService],
     }),
+    RouterModule.register(routes),
     ScheduleModule.forRoot(),
     AuthModule,
     UsersModule,
-    TasksModule,
+    CompaniesModule,
+    CompanyAdminsModule,
+    EmployeesModule,
+    TransferRequestsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

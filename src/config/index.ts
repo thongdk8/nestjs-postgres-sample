@@ -8,6 +8,9 @@ interface iConfig {
     privateKey: string;
     publicKey: string;
   };
+  jwt: {
+    expiresIn: string;
+  };
 }
 
 export default (): Partial<iConfig> => ({
@@ -15,6 +18,9 @@ export default (): Partial<iConfig> => ({
   keys: {
     privateKey: process.env.PRIVATE_KEY.replace(/\\n/gm, '\n'),
     publicKey: process.env.PUBLIC_KEY.replace(/\\n/gm, '\n'),
+  },
+  jwt: {
+    expiresIn: process.env.JWT_EXPIRES_IN || '3600s',
   },
   database: dbConfig(),
 });
