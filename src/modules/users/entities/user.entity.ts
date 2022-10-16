@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, Unique, UpdateDateColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, Unique, UpdateDateColumn } from 'typeorm';
 import { Role } from '../enums/role.enum';
 
 @Entity()
@@ -15,9 +15,6 @@ export class User {
 
   @Column({ select: false })
   password: string;
-
-  @Column({ name: 'is_active', default: true })
-  isActive: boolean;
 
   @Column({
     type: 'enum',

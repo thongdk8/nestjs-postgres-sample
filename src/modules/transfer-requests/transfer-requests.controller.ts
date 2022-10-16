@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, UseGuards, Request } from '@nestjs/common';
 import { JwtAuthGuard } from '../auth/strategy/jwt-auth.guard';
 import { RolesGuard } from '../auth/strategy/roles.guard';
 import { Roles } from '../../custom.decorator';
@@ -16,8 +16,8 @@ export class TransferRequestsController {
   constructor(private readonly transferRequestsService: TransferRequestsService) {}
 
   @Post()
-  create(@Body() createEmployeeDto: CreateTransferRequestDto) {
-    return this.transferRequestsService.create(createEmployeeDto);
+  create(@Request() req, @Body() createEmployeeDto: CreateTransferRequestDto) {
+    return this.transferRequestsService.create(req.user, createEmployeeDto);
   }
 
   @Get()

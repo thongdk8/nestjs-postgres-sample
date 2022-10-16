@@ -4,6 +4,7 @@ import { Repository, getManager } from 'typeorm';
 import { CreateTransferRequestDto } from './dto/create-transfer-request.dto';
 import { TransferRequest } from './entities/transfer-request.entity';
 import { Employee } from '../employees/entities/employee.entity';
+import { User } from '../users/entities/user.entity';
 
 @Injectable()
 export class TransferRequestsService {
@@ -12,10 +13,13 @@ export class TransferRequestsService {
     @InjectRepository(Employee) private readonly employeeRepository: Repository<Employee>,
   ) {}
 
-  async create(createTransferRequestDto: CreateTransferRequestDto): Promise<TransferRequest> {
+  async create(user: User, createTransferRequestDto: CreateTransferRequestDto): Promise<TransferRequest> {
     let result;
     await getManager().transaction(async (transactionalEntityManager) => {
-      const employee = await transactionalEntityManager.findOne(Employee, { id: createTransferRequestDto.employeeId });
+      const employee = await transactionalEntityManager.findOne(Employee, { user });
+      if (!employee) {
+        throw new NotFoundException(null, 'Employee not found');
+      }
       const currentMonth = new Date().getMonth();
       const transferRequest = new TransferRequest();
       transferRequest.month = currentMonth;
