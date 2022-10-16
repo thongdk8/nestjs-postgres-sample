@@ -46,15 +46,17 @@ export class TransferRequestsService {
     return result;
   }
 
-  findAll(): Promise<TransferRequest[]> {
+  async findAll(user: User): Promise<TransferRequest[]> {
+    const employee = await this.employeeRepository.findOne({ user });
     return this.transferRequestRepository.find({
-      relations: ['user', 'company'],
+      where: { employee },
+      relations: ['employee'],
     });
   }
 
-  async findOneByEmployeeId(employeeId: string): Promise<TransferRequest> {
+  async findByEmployeeId(employeeId: string): Promise<TransferRequest[]> {
     const employee = await this.employeeRepository.findOne({ id: employeeId });
-    const result = await this.transferRequestRepository.findOne({
+    const result = await this.transferRequestRepository.find({
       where: { employee },
       relations: ['employee'],
     });
