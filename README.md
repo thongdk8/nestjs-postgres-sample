@@ -12,6 +12,9 @@ Please create an `.env` file similar to [.env.example](.env.example)
 ## Start postgres database in docker
 $ docker-compose -f docker-compose-db-only.yml up -d 
 
+## Install ts node
+$ npm i ts-node
+
 ## Run tables creation
 $ npm run schema:sync
 
